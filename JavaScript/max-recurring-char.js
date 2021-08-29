@@ -4,13 +4,8 @@
  * https://scotch.io/courses/the-ultimate-guide-to-javascript-algorithms/finding-the-most-recurring-character
  */
 
-// Forming arrays from the character map
-function maxRecurringChar(text) {
+function createCharMap(text) {
   const charMap = {};
-  let charArray = [];
-  let valuesArray = [];
-  let maxCharValue = 0;
-  let maxChar = "";
 
   text
     .toUpperCase()
@@ -22,6 +17,17 @@ function maxRecurringChar(text) {
         charMap[char] = 1;
       }
     });
+
+  return charMap;
+}
+
+// Forming arrays from the character map
+function maxRecurringChar(text) {
+  const charMap = createCharMap(text);
+  let charArray = [];
+  let valuesArray = [];
+  let maxCharValue = 0;
+  let maxChar = "";
 
   charArray = Object.keys(charMap);
   valuesArray = Object.values(charMap);
@@ -35,20 +41,9 @@ function maxRecurringChar(text) {
 
 // For...in iteration
 function maxRecurringCharUsingForIn(text) {
-  const charMap = {};
+  const charMap = createCharMap(text);
   let maxCharValue = 0;
   let maxChar = "";
-
-  text
-    .toUpperCase()
-    .split("")
-    .forEach((char) => {
-      if (charMap.hasOwnProperty(char)) {
-        charMap[char]++;
-      } else {
-        charMap[char] = 1;
-      }
-    });
 
   Object.keys(charMap).forEach((char) => {
     if (charMap[char] > maxCharValue) {
